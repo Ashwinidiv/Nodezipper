@@ -4,13 +4,24 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server.js"
+    "start": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run start\" \"npm run client\"",
+    "build": "npm install --legacy-peer-deps && npm install --legacy-peer-deps --prefix frontend && npm run build --prefix frontend"
   },
   "author": "ashwini",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.2",
+    "bcrypt": "^5.1.1",
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "nodemon": "^3.1.4"
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.1",
+    "nodemon": "^3.1.4",
+    "react-markdown": "^9.0.1"
   }
 }
