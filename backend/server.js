@@ -7,6 +7,13 @@ const userRoutes = require("./routes/userRoutes.js");
 const noteRoutes = require("./routes/noteRoutes.js");
 const { notFound, errorHandler } = require("./middlewares/errorMiddlewares.js");
 const path = require("path");
+const { fileURLToPath } = require("url");
+
+// resolving dirname
+// const __filename1 = fileURLToPath(import.meta.url);
+// const __dirname1 = path.dirname(__filename1);
+// const __dirname1 = path.resolve();
+// console.log(__dirname1);
 
 const app = express();
 dotenv.config();
@@ -19,18 +26,15 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/notes", noteRoutes);
 
-const __dirname1 = path.resolve();
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname1, "/frontend/build")));
-
-  app.get("/", (req, res) => {
-    res.sendFile(path.resolve(__dirname1, "frontend", "dist", "index.html"));
-  });
-} else {
-  app.get("/", (req, res) => {
-    res.send("API is running successfully");
-  });
-}
+// use the client app
+// app.use(express.static(path.join(__dirname1, "/client/dist")));
+// app.get("*", (req, res) =>
+//   res.sendFile(path.join(__dirname1, "/client/dist/index.html"))
+// );
+app.use(express.static(path.join(__dirname, "/client/dist")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "/client/dist/index.html"))
+);
 
 app.use(notFound);
 app.use(errorHandler);
