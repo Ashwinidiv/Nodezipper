@@ -7,7 +7,7 @@
     "start": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run start\" \"npm run client\"",
-    "build": "cd frontend && npm install && npm run build"
+    "build": "npm install --production=false && cd frontend && npm install && npm run build"
   },
   "author": "ashwini",
   "license": "ISC",
