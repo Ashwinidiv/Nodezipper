@@ -20,8 +20,7 @@ export default defineConfig({
     },
   },
   build: {
-    rollupOptions: {
-      external: ["react-markdown"], // Add this line
-    },
+    outDir: "dist",
+    rollupOptions: {},
   },
 });
