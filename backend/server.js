@@ -9,12 +9,6 @@ const { notFound, errorHandler } = require("./middlewares/errorMiddlewares.js");
 const path = require("path");
 const { fileURLToPath } = require("url");
 
-// resolving dirname
-// const __filename1 = fileURLToPath(import.meta.url);
-// const __dirname1 = path.dirname(__filename1);
-// const __dirname1 = path.resolve();
-// console.log(__dirname1);
-
 const app = express();
 dotenv.config();
 connectDB();
@@ -26,14 +20,9 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/notes", noteRoutes);
 
-// use the client app
-// app.use(express.static(path.join(__dirname1, "/client/dist")));
-// app.get("*", (req, res) =>
-//   res.sendFile(path.join(__dirname1, "/client/dist/index.html"))
-// );
-app.use(express.static(path.join(__dirname, "/client/dist")));
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
 app.get("*", (req, res) =>
-  res.sendFile(path.join(__dirname, "/client/dist/index.html"))
+  res.sendFile(path.join(__dirname, "/frontend/dist/index.html"))
 );
 
 app.use(notFound);
